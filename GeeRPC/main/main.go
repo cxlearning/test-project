@@ -1,8 +1,8 @@
 package main
 
 import (
+	"github.com/test-project/GeeRPC"
 	"log"
-	"myProject/projects-7days/GeeRPC"
 	"net"
 	"sync"
 	"time"
