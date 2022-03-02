@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"github.com/test-project/GeeRPC"
 	"log"
 	"net"
@@ -36,7 +37,7 @@ func main() {
 	log.SetFlags(0)
 	addr := make(chan string)
 	go startServer(addr)
-	client, _ := geerpc.Dial("tcp", <-addr)
+	client, _ := geerpc.Dial("tcp", <-addr, geerpc.DefaultOption)
 	defer func() { _ = client.Close() }()
 
 	time.Sleep(time.Second)
@@ -48,7 +49,8 @@ func main() {
 			defer wg.Done()
 			args := &Args{Num1: i, Num2: i * i}
 			var reply int
-			if err := client.Call("Foo.Sum", args, &reply); err != nil {
+			ctx, _ := context.WithTimeout(context.Background(),time.Second * 10)
+			if err := client.Call(ctx,"Foo.Sum", args, &reply); err != nil {
 				log.Fatal("call Foo.Sum error:", err)
 			}
 			log.Printf("%d + %d = %d", args.Num1, args.Num2, reply)
