@@ -1,8 +1,8 @@
 package geecache
 
 import (
-	"distributed-cache/singleflight"
 	"errors"
+	"github.com/test-project/distributed-cache/singleflight"
 	"log"
 	"sync"
 )
@@ -37,7 +37,7 @@ type Group struct {
 	name      string
 	getter    Getter // 未命中， 从数据源中拿数据
 	mainCache cache
-	peers     PeerPicker
+	peers     PeerPicker  // HTTPPool注入
 	loader    *singleflight.Group
 }
 

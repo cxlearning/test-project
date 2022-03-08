@@ -1,8 +1,8 @@
 package geecache
 
 import (
-	"distributed-cache/consistenthash"
 	"fmt"
+	"github.com/test-project/distributed-cache/consistenthash"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -16,6 +16,12 @@ const (
 	defaultReplicas = 50
 )
 
+
+/**
+HTTPPool  可以理解为一个节点
+	1 提供 http访问
+	2 peers 和 httpGetters， 提供访问其他节点的能力
+ */
 // HTTPPool implements PeerPicker for a pool of HTTP peers.
 type HTTPPool struct {
 	self        string // this peer's base URL, e.g. "https://example.net:8000", httppool 所在的节点
@@ -100,7 +106,7 @@ type httpGetter struct {
 }
 
 /**
-向 group 发送 http 请求获得val
+向 httpGetter对应节点 发送 http 请求获得val
 一个节点可能在多个group中，所以需要groupName
 */
 func (h *httpGetter) Get(group string, key string) ([]byte, error) {

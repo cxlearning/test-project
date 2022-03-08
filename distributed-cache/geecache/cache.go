@@ -1,7 +1,7 @@
 package geecache
 
 import (
-	"distributed-cache/lru"
+	"github.com/test-project/distributed-cache/lru"
 	"sync"
 )
 

@@ -10,7 +10,7 @@ kkk not exist
 import (
 	"flag"
 	"fmt"
-	"myProject/projects-7days/distributed-cache/geecache"
+	"github.com/test-project/distributed-cache/geecache"
 
 	"log"
 	"net/http"

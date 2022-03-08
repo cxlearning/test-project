@@ -1,6 +1,6 @@
 package geecache
 
-// 根据 key 获得 对应 group 的 PeerGetter（从group中获得val）
+// 根据 key 获得对应节点的PeerGetter
 type PeerPicker interface {
 	PickPeer(key string)(peer PeerGetter, ok bool)
 }
